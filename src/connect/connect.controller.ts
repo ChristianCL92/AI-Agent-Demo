@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { ConnectService } from './connect.service';
 import { CreateConnectDto } from './dto/create-connect.dto';
 import { UpdateConnectDto } from './dto/update-connect.dto';
@@ -13,8 +13,8 @@ export class ConnectController {
   }
 
   @Get("message")
-  async getMessage() {
-    return await this.connectService.message()
+  async getMessage(@Query("prompt") prompt: string = "computer") {
+    return await this.connectService.sendMessage(prompt)
   }
 
   @Get()
