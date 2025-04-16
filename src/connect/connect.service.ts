@@ -13,7 +13,7 @@ export class ConnectService {
     });
   }
 
-  async message() {
+  async sendMessage(prompt:string): Promise<string> {
    try {
     const msg = await this.anthropic.messages.create({
       model: "claude-3-7-sonnet-20250219",
@@ -26,17 +26,16 @@ export class ConnectService {
               content: [
             {
               type: "text",
-              text: "Why is the ocean salty?"
+              text: prompt
             }
           ]
         }
     ]
 });
-    console.log(msg);
-    return {
-      poem: (msg.content[0] as { text: string }).text,
-      usage: msg.usage
-    }
+    console.log("content from result", msg);
+    return (msg.content[0] as { text: string }).text
+      
+    
    } catch (error) {
     throw new Error(`Could not perform Claude response ${error.message}`);
    } 
