@@ -4,7 +4,7 @@ import { CliCommand } from "./cli.command/cli.command";
 import { ConfigModule } from "@nestjs/config"
 
 @Module({
-  imports: [ConfigModule],
+  imports: [ConfigModule.forRoot()],
   providers: [CliService, CliCommand],
   exports: [CliService]
 })
